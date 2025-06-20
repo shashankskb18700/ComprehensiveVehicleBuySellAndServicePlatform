@@ -14,7 +14,10 @@ import ServiceProviderForm from "./pages/serviceProviderForm";
 import BookAppointment from "./pages/bookAppointment";
 import Profile from "./pages/profile";
 import ProtectedRoute from "./components/protectedRoutes/protectedRoutes";
+import AdminDashboard from "./pages/adminDashBoard";
 import Header from "./components/header/header";
+import AdminListings from "./pages/admin/adminListing";
+import AdminUserList from "./pages/admin/adminUserList";
 
 function App() {
   const token = Cookies.get("token");
@@ -43,6 +46,33 @@ function App() {
             <Route path="/services" element={<ServiceProviderForm />} />
             <Route path="*" element={<Navigate to="/" />} />
             <Route path="/profile" element={<Profile />} />
+
+            <Route
+              path="/admin"
+              element={
+                <ProtectedRoute allowedRoles={["ADMIN"]}>
+                  <AdminDashboard />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/admin/users"
+              element={
+                <ProtectedRoute allowedRoles={["ADMIN"]}>
+                  <AdminUserList></AdminUserList>
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/admin/listing"
+              element={
+                <ProtectedRoute allowedRoles={["ADMIN"]}>
+                  <AdminListings></AdminListings>
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </>
       )}

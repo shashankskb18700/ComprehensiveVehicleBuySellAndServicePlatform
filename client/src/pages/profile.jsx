@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import axios from "axios";
 
 const Profile = () => {
   const [user, setUser] = useState(null);
   const [myCars, setMyCars] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   const fetchProfileData = async () => {
     try {
@@ -36,7 +39,7 @@ const Profile = () => {
         {},
         { withCredentials: true }
       );
-      window.location.href = "/"; // Redirect to home or auth page
+      window.location.href = "/";
     } catch (err) {
       console.error("Logout failed:", err);
     }
@@ -52,19 +55,38 @@ const Profile = () => {
     <div style={{ maxWidth: "900px", margin: "auto", padding: "20px" }}>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <h1>👤 My Profile</h1>
-        <button
-          onClick={handleLogout}
-          style={{
-            backgroundColor: "#dc3545",
-            color: "white",
-            border: "none",
-            padding: "8px 16px",
-            borderRadius: "6px",
-            cursor: "pointer",
-          }}
-        >
-          Logout
-        </button>
+        <div>
+          {user?.role === "ADMIN" && (
+            <button
+              onClick={() => navigate("/admin")}
+              style={{
+                backgroundColor: "#007bff",
+                color: "white",
+                border: "none",
+                padding: "8px 16px",
+                borderRadius: "6px",
+                cursor: "pointer",
+                marginRight: "10px",
+              }}
+            >
+              Admin Dashboard
+            </button>
+          )}
+
+          <button
+            onClick={handleLogout}
+            style={{
+              backgroundColor: "#dc3545",
+              color: "white",
+              border: "none",
+              padding: "8px 16px",
+              borderRadius: "6px",
+              cursor: "pointer",
+            }}
+          >
+            Logout
+          </button>
+        </div>
       </div>
 
       <div

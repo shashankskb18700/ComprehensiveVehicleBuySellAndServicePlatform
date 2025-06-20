@@ -1,4 +1,5 @@
 const User = require("../model/user.model.js");
+const CarListing = require("../model/carListing.model");
 const { setUser } = require("../services/auth.js");
 
 const handleAdminLogin = async (req, res) => {
@@ -22,6 +23,26 @@ const handleAdminLogin = async (req, res) => {
   }
 };
 
+const handleGetAllUsers = async (req, res) => {
+  try {
+    const users = await User.find({}, "-password");
+    res.json(users);
+  } catch (err) {
+    res.status(500).json({ message: "Error fetching users" });
+  }
+};
+
+const handleGetAllCarListings = async (req, res) => {
+  try {
+    const listings = await CarListing.find().populate("userId", "name email");
+    res.json(listings);
+  } catch (err) {
+    res.status(500).json({ message: "Error fetching listings" });
+  }
+};
+
 module.exports = {
   handleAdminLogin,
+  handleGetAllUsers,
+  handleGetAllCarListings,
 };
