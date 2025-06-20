@@ -12,17 +12,6 @@ const Login = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleTestCarListing = async () => {
-    try {
-      const res = await axios.get("http://localhost:5000/carListing", {
-        withCredentials: true,
-      });
-      console.log(res);
-    } catch (e) {
-      console.log("error", e);
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -35,6 +24,7 @@ const Login = () => {
         }
       );
       console.log(res);
+      window.location.href = "/";
     } catch (e) {
       console.log(e);
     }
@@ -59,8 +49,6 @@ const Login = () => {
         ></input>
         <button>Login </button>
       </form>
-
-      <button onClick={handleTestCarListing}>Carlisting </button>
     </div>
   );
 };

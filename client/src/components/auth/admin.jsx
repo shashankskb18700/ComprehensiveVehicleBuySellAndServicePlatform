@@ -23,6 +23,7 @@ const Admin = () => {
       );
 
       console.log(res);
+      window.location.href = "/";
     } catch (err) {
       console.error("Login error:", err);
       setError("Login failed or unauthorized.");

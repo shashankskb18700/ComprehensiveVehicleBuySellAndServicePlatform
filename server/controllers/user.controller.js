@@ -40,7 +40,31 @@ const handleUserLogin = async (req, res) => {
   }
 };
 
+const handleGetUserProfile = async (req, res) => {
+  try {
+    if (!req.user || !req.user._id) {
+      return res.status(401).json({ msg: "Unauthorized access" });
+    }
+
+    const user = await User.findById(req.user._id).select("-password");
+    if (!user) {
+      return res.status(404).json({ msg: "User not found" });
+    }
+
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ msg: "Server error while fetching profile" });
+  }
+};
+
+const handleUserLogout = (req, res) => {
+  res.clearCookie("token");
+  res.json({ message: "Logged out successfully" });
+};
+
 module.exports = {
   handleUserSignUp,
   handleUserLogin,
+  handleGetUserProfile,
+  handleUserLogout,
 };

@@ -48,7 +48,7 @@ app.use(
   serviceProviderRoute
 );
 app.use("/appointmentRoutes", appointmentRoutes);
-app.use("/myCarListing", myCarListingRoutes);
+app.use("/myCarListing", approveTo(["ADMIN", "NORMAL"]), myCarListingRoutes);
 
 app.use("/api/cars", approveTo(["ADMIN", "NORMAL"]), carRoutes);
 app.use("/api/cart", approveTo(["ADMIN", "NORMAL"]), cartRoutes);

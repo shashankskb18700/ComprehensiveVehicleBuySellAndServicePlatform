@@ -15,7 +15,10 @@ const Signup = () => {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/user", formData);
+      const res = await axios.post(
+        "http://localhost:5000/user/signup",
+        formData
+      );
       alert(res.data.msg);
       console.log(res);
     } catch (err) {

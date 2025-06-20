@@ -1,13 +1,10 @@
 const express = require("express");
+const {
+  handleFetchMyListing,
+} = require("../controllers/myCarListing.controller");
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  if (!req.user) return res.json({ msg: "log in to see your car listing" });
-
-  // const carListing = carListingModel.find({created by: }) // it will be used to fetch only the car  listing by specific user
-
-  res.json({ msg: "your car listing" });
-});
+router.get("/", handleFetchMyListing);
 
 module.exports = router;
