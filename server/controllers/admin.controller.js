@@ -1,6 +1,8 @@
 const User = require("../model/user.model.js");
 const CarListing = require("../model/carListing.model");
 const { setUser } = require("../services/auth.js");
+const ServiceProviderModel = require("../model/serviceProvider.model.js");
+const Order = require("../model/order.model");
 
 const handleAdminLogin = async (req, res) => {
   try {
@@ -41,8 +43,47 @@ const handleGetAllCarListings = async (req, res) => {
   }
 };
 
+const handleFetchServiceProvider = async (req, res) => {
+  try {
+    const providers = await ServiceProviderModel.find().sort({ createdAt: -1 });
+    res.json(providers);
+  } catch (error) {
+    console.error("Error fetching service providers:", error);
+    res.status(500).json({ message: "Failed to fetch service providers" });
+  }
+};
+
+const handleFetchTransaction = async (req, res) => {
+  try {
+    const orders = await Order.find({})
+      .sort({ orderDate: -1 })
+      .populate("items.car");
+
+    res.json(orders);
+  } catch (error) {
+    console.error("ERROR FETCHING ORDERS:", error);
+    res.status(500).json({ message: "Server error while fetching orders." });
+  }
+};
+
+const handleFetchTransactionById = async (req, res) => {
+  try {
+    const order = await Order.findById(req.params.id).populate("items.car");
+    if (!order) {
+      return res.status(404).json({ message: "Order not found" });
+    }
+    res.json(order);
+  } catch (error) {
+    console.error("ERROR FETCHING SINGLE ORDER:", error);
+    res.status(500).json({ message: "Server error while fetching order." });
+  }
+};
+
 module.exports = {
   handleAdminLogin,
   handleGetAllUsers,
   handleGetAllCarListings,
+  handleFetchServiceProvider,
+  handleFetchTransaction,
+  handleFetchTransactionById,
 };

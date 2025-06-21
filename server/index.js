@@ -40,7 +40,7 @@ app.use(checkForAuthentication);
 app.use("/user", userRoutes);
 app.use("/admin", adminRoutes);
 
-app.use("/carListing", approveTo(["ADMIN", "NORMAL"]), carListingRoutes); // carlisting will only be available for logged in user
+app.use("/carListing", approveTo(["ADMIN", "NORMAL"]), carListingRoutes);
 
 app.use(
   "/serviceProvider",

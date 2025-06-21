@@ -6,7 +6,7 @@ const AdminListings = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/admin/listing", { withCredentials: true })
+      .get("http://localhost:5000/admin/listings", { withCredentials: true })
       .then((res) => setCars(res.data))
       .catch((err) => console.error("Error fetching car listings", err));
   }, []);

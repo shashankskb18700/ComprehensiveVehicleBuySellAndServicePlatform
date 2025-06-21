@@ -18,6 +18,8 @@ import AdminDashboard from "./pages/adminDashBoard";
 import Header from "./components/header/header";
 import AdminListings from "./pages/admin/adminListing";
 import AdminUserList from "./pages/admin/adminUserList";
+import AdminServiceProviders from "./pages/admin/adminServiceProvider";
+import AdminTransaction from "./pages/admin/adminTransaction";
 
 function App() {
   const token = Cookies.get("token");
@@ -66,10 +68,27 @@ function App() {
             />
 
             <Route
-              path="/admin/listing"
+              path="/admin/listings"
               element={
                 <ProtectedRoute allowedRoles={["ADMIN"]}>
                   <AdminListings></AdminListings>
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/admin/providers"
+              element={
+                <ProtectedRoute allowedRoles={["ADMIN"]}>
+                  <AdminServiceProviders></AdminServiceProviders>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/transactions"
+              element={
+                <ProtectedRoute allowedRoles={["ADMIN"]}>
+                  <AdminTransaction></AdminTransaction>
                 </ProtectedRoute>
               }
             />
