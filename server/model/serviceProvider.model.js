@@ -5,7 +5,7 @@ const serviceProviderSchema = new mongoose.Schema({
   garageName: { type: String, required: true },
   location: { type: String, required: true },
   experience: { type: Number, required: true },
-  services: { type: String, required: true }, // could be array in future
+  services: { type: String, required: true },
   contact: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
 });

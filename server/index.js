@@ -21,6 +21,7 @@ const carRoutes = require("./routes/car.route");
 const cartRoutes = require("./routes/cart.route");
 const paymentRoutes = require("./routes/payment.route");
 const orderRoutes = require("./routes/order.route");
+const reviewRoutes = require("./routes/review.route");
 
 dotenv.config();
 
@@ -54,6 +55,7 @@ app.use("/api/cars", approveTo(["ADMIN", "NORMAL"]), carRoutes);
 app.use("/api/cart", approveTo(["ADMIN", "NORMAL"]), cartRoutes);
 app.use("/api/payment", approveTo(["ADMIN", "NORMAL"]), paymentRoutes);
 app.use("/api/orders", approveTo(["ADMIN", "NORMAL"]), orderRoutes);
+app.use("/api/reviews", reviewRoutes);
 
 app.listen(5000, () => {
   console.log("server is on ");

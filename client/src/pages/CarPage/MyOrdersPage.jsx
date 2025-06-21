@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import ReviewForm from "../reviewForm";
 
 const MyOrdersPage = () => {
   const [orders, setOrders] = useState([]);
@@ -109,6 +110,10 @@ const MyOrdersPage = () => {
                     <strong>{item.car.name}</strong>
                     <br />
                     <span>Qty: {item.quantity}</span>
+                  </div>
+
+                  <div style={{ width: "100%", marginTop: "10px" }}>
+                    <ReviewForm targetId={item.car._id} targetType="car" />
                   </div>
                 </div>
               ))}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import ReviewList from "../reviewList";
 
 const CarDetailPage = () => {
   const { id } = useParams();
@@ -197,6 +198,12 @@ const CarDetailPage = () => {
             Add to Cart
           </button>
         </div>
+      </div>
+
+      <div style={{ marginTop: "40px" }}>
+        <h2>⭐ Reviews</h2>
+
+        <ReviewList targetId={car._id} />
       </div>
     </div>
   );
