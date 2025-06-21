@@ -1,0 +1,9 @@
+.authLeft {
+  background-image: url("../admin/../../assets/carD.jpeg") !important;
+  background-size: cover !important;
+  color: black !important;
+}
+.banner {
+  background-color: rgba(255, 255, 255, 0.752);
+  border-radius: 2rem;
+}

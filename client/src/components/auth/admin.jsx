@@ -31,30 +31,54 @@ const Admin = () => {
   };
 
   return (
-    <div className="container mt-5">
-      <h2 className="mb-3">👨‍💼 Admin Login</h2>
-      <form onSubmit={handleAdminLogin} className="w-50">
+    <div
+      className="mx-auto"
+      style={{
+        maxWidth: "400px",
+        width: "100%",
+        padding: "20px",
+        backgroundColor: "transparent",
+      }}
+    >
+      <div className="text-center mb-4">
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+          alt="admin icon"
+          width="60"
+          height="60"
+        />
+        <h4 className="mt-2">Admin Login</h4>
+      </div>
+
+      <form onSubmit={handleAdminLogin}>
         <div className="mb-3">
-          <label>Email</label>
+          <label>Email address</label>
           <input
             type="email"
             name="email"
             className="form-control"
+            placeholder="Enter admin email"
             onChange={handleChange}
             required
           />
         </div>
-        <div className="mb-3">
+
+        <div className="mb-4">
           <label>Password</label>
           <input
             type="password"
             name="password"
             className="form-control"
+            placeholder="Enter password"
             onChange={handleChange}
             required
           />
         </div>
-        {error && <div className="alert alert-danger">{error}</div>}
+
+        {error && (
+          <div className="alert alert-danger py-2 text-center">{error}</div>
+        )}
+
         <button className="btn btn-dark w-100" type="submit">
           Login
         </button>

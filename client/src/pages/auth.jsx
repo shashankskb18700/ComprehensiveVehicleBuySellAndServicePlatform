@@ -1,103 +1,137 @@
-// src/pages/Auth.jsx
 import { useState } from "react";
-import { Button, Container, Row, Col } from "react-bootstrap";
+import { Button, Container, Row, Col, Card } from "react-bootstrap";
 import Login from "../components/auth/login";
 import Signup from "../components/auth/signup";
 import Admin from "../components/auth/admin";
+import "./styles/auth.css";
 
 const Auth = () => {
-  const [mode, setMode] = useState(null); // login or signup
-  const [loginType, setLoginType] = useState(null); // user or admin
+  const [mode, setMode] = useState(null);
+  const [loginType, setLoginType] = useState(null);
 
   return (
     <Container fluid className="vh-100 bg-light">
       <Row className="h-100">
         <Col
           md={6}
-          className="bg-dark text-white d-flex flex-column justify-content-center align-items-center"
+          className="auth-left position-relative text-white authLeft"
+          style={{
+            backgroundImage: `url("../assets/carD.jpeg")`,
+            backgroundSize: "contain",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+            backgroundColor: "black",
+          }}
         >
-          <h1 className="display-4 mb-3">🚗 Vehicle Platform</h1>
-          <p className="text-center">
-            Buy, Sell, and Service Vehicles with Ease
-          </p>
+          <div
+            className="position-absolute w-100 text-center px-3"
+            style={{ top: "30px", zIndex: 2 }}
+          >
+            <h1
+              className="display-4 fw-bold"
+              style={{ color: "rgb(10,109,250)" }}
+            >
+              Wipro Cars
+            </h1>
+            <p style={{ fontSize: "18px", color: "rgb(50,109,250)" }}>
+              Buy, Sell & Service with Trust
+            </p>
+          </div>
         </Col>
 
         <Col
           md={6}
-          className="d-flex flex-column justify-content-center align-items-center"
+          className="d-flex justify-content-center align-items-center bg-light"
         >
-          {!mode && (
-            <>
-              <h2 className="mb-4">Welcome</h2>
-              <Button
-                variant="primary"
-                className="mb-3 w-50"
-                onClick={() => setMode("login")}
-              >
-                Login
-              </Button>
-              <Button
-                variant="outline-primary"
-                className="w-50"
-                onClick={() => setMode("signup")}
-              >
-                Signup
-              </Button>
-            </>
-          )}
+          <Card
+            className="shadow p-4"
+            style={{ width: "100%", maxWidth: "420px" }}
+          >
+            {!mode && (
+              <>
+                <h3 className="text-center mb-4">Welcome</h3>
+                <Button
+                  variant="primary"
+                  className="mb-3 w-100"
+                  onClick={() => setMode("login")}
+                >
+                  Login
+                </Button>
+                <Button
+                  variant="outline-primary"
+                  className="w-100"
+                  onClick={() => setMode("signup")}
+                >
+                  Signup
+                </Button>
+              </>
+            )}
 
-          {mode === "login" && !loginType && (
-            <>
-              <h4 className="mb-3">Login As</h4>
-              <Button
-                className="mb-2 w-50"
-                onClick={() => setLoginType("user")}
-              >
-                User
-              </Button>
-              <Button
-                variant="secondary"
-                className="w-50"
-                onClick={() => setLoginType("admin")}
-              >
-                Admin
-              </Button>
-              <Button
-                variant="link"
-                className="mt-3"
-                onClick={() => setMode(null)}
-              >
-                ⬅ Back
-              </Button>
-            </>
-          )}
+            {mode === "login" && !loginType && (
+              <>
+                <h4 className="text-center mb-3">Login As</h4>
+                <Button
+                  className="mb-2 w-100"
+                  onClick={() => setLoginType("user")}
+                >
+                  User
+                </Button>
+                <Button
+                  variant="secondary"
+                  className="w-100"
+                  onClick={() => setLoginType("admin")}
+                >
+                  Admin
+                </Button>
+                <Button
+                  variant="link"
+                  className="mt-3 d-block text-center"
+                  onClick={() => setMode(null)}
+                >
+                  ⬅ Back
+                </Button>
+              </>
+            )}
 
-          {mode === "login" && loginType === "user" && (
-            <>
-              <Login />
-              <Button variant="link" onClick={() => setLoginType(null)}>
-                ⬅ Back
-              </Button>
-            </>
-          )}
+            {mode === "login" && loginType === "user" && (
+              <>
+                <Login />
+                <Button
+                  variant="link"
+                  className="mt-3 d-block text-center"
+                  onClick={() => setLoginType(null)}
+                >
+                  ⬅ Back
+                </Button>
+              </>
+            )}
 
-          {mode === "login" && loginType === "admin" && (
-            <>
-              <Admin />
-              <Button variant="link" onClick={() => setLoginType(null)}>
-                ⬅ Back
-              </Button>
-            </>
-          )}
+            {mode === "login" && loginType === "admin" && (
+              <>
+                <Admin />
+                <Button
+                  variant="link"
+                  className="mt-3 d-block text-center"
+                  onClick={() => setLoginType(null)}
+                >
+                  ⬅ Back
+                </Button>
+              </>
+            )}
 
-          {mode === "signup" && (
-            <>
-              <Signup />
-              <Button variant="link" onClick={() => setMode(null)}>
-                ⬅ Back
-              </Button>
-            </>
-          )}
+            {mode === "signup" && (
+              <>
+                <Signup />
+                <Button
+                  variant="link"
+                  className="mt-3 d-block text-center"
+                  onClick={() => setMode(null)}
+                >
+                  ⬅ Back
+                </Button>
+              </>
+            )}
+          </Card>
         </Col>
       </Row>
     </Container>

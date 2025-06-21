@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
-import { Container, Form, Button } from "react-bootstrap";
+import { Container, Form, Button, Card } from "react-bootstrap";
 import axios from "axios";
+import SearchServiceProviders from "../components/search/searchServiceProvider";
+import { ToastContainer, toast } from "react-toastify";
 
 const BookAppointment = () => {
   const [formData, setFormData] = useState({
@@ -9,6 +10,7 @@ const BookAppointment = () => {
     preferredTime: "",
     issueDescription: "",
   });
+  const notify = (e) => toast(e);
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -16,22 +18,19 @@ const BookAppointment = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const res = await axios.post(
         "http://localhost:5000/appointmentRoutes",
-        {
-          ...formData,
-        },
+        formData,
         {
           withCredentials: true,
         }
       );
 
-      alert("Appointment booked successfully!");
+      notify("Appointment booked successfully!");
+
       console.log("Server Response:", res.data);
 
-      // Reset form
       setFormData({
         preferredDate: "",
         preferredTime: "",
@@ -43,45 +42,66 @@ const BookAppointment = () => {
   };
 
   return (
-    <Container className="mt-5">
-      <h2 className="mb-4">📅 Book Appointment</h2>
-      <Form onSubmit={handleSubmit} className="w-75 mx-auto">
-        <Form.Group className="mb-3">
-          <Form.Label>Preferred Date</Form.Label>
-          <Form.Control
-            type="date"
-            name="preferredDate"
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
+    <div>
+      <Container className="mt-5 mb-5">
+        <Card className="shadow-sm border-0 mb-4 p-4 bg-light">
+          <SearchServiceProviders />
+        </Card>
 
-        <Form.Group className="mb-3">
-          <Form.Label>Preferred Time</Form.Label>
-          <Form.Control
-            type="time"
-            name="preferredTime"
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
+        <Card className="shadow border-0 p-4">
+          <h2 className="text-center mb-4">📅 Book an Appointment</h2>
 
-        <Form.Group className="mb-3">
-          <Form.Label>Describe Your Car Issue</Form.Label>
-          <Form.Control
-            as="textarea"
-            name="issueDescription"
-            rows={4}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
+          <Form onSubmit={handleSubmit} className="w-100">
+            <Form.Group className="mb-3">
+              <Form.Label className="fw-semibold">Preferred Date</Form.Label>
+              <Form.Control
+                type="date"
+                name="preferredDate"
+                value={formData.preferredDate}
+                onChange={handleChange}
+                required
+                className="shadow-sm"
+              />
+            </Form.Group>
 
-        <Button type="submit" variant="primary">
-          Book Appointment
-        </Button>
-      </Form>
-    </Container>
+            <Form.Group className="mb-3">
+              <Form.Label className="fw-semibold">Preferred Time</Form.Label>
+              <Form.Control
+                type="time"
+                name="preferredTime"
+                value={formData.preferredTime}
+                onChange={handleChange}
+                required
+                className="shadow-sm"
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-4">
+              <Form.Label className="fw-semibold">
+                Describe the Issue
+              </Form.Label>
+              <Form.Control
+                as="textarea"
+                name="issueDescription"
+                rows={4}
+                value={formData.issueDescription}
+                onChange={handleChange}
+                placeholder="E.g. strange engine noise, tire pressure low, etc."
+                required
+                className="shadow-sm"
+              />
+            </Form.Group>
+
+            <div className="d-grid">
+              <Button variant="primary" size="lg" type="submit">
+                Book Appointment
+              </Button>
+            </div>
+          </Form>
+        </Card>
+      </Container>
+      <ToastContainer />
+    </div>
   );
 };
 
