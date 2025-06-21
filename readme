@@ -1,1 +1,111 @@
+# 🚗 Comprehensive Vehicle Buy-Sell and Service Platform
 
+A full-stack MERN application designed to digitize the entire vehicle lifecycle. This platform allows users to buy, sell, and service their vehicles through a unified interface with secure transactions.
+
+## 📌 Key Features
+
+### 🔐 User Authentication
+
+- JWT-based authentication with secure cookies
+- Role-based access control (user/admin)
+- Profile management dashboard
+
+### 🚙 Vehicle Marketplace
+
+- Comprehensive car listings with filters
+- Detailed vehicle specifications and images
+- Shopping cart and checkout system
+- Order history and receipts
+
+### 🔧 Service Management
+
+- Service provider registration
+- Appointment booking system
+- Service reviews and ratings
+
+### 👑 Admin Portal
+
+- User management
+- Listing moderation
+- Transaction monitoring
+- Service provider oversight
+
+## 🧠 Technical Stack
+
+| Layer     | Technologies Used            |
+| --------- | ---------------------------- |
+| Frontend  | React 19, Vite, Tailwind CSS |
+| Backend   | Node.js, Express 5           |
+| Database  | MongoDB with Mongoose        |
+| Auth      | JWT with cookie storage      |
+| Payments  | Stripe integration           |
+| API Style | RESTful architecture         |
+
+## ⚙️ API Endpoints
+
+### User Management
+
+- `POST /api/users/register` - User registration
+- `POST /api/users/login` - User authentication
+- `GET /api/users/me` - Profile retrieval
+
+### Car Listings
+
+- `GET /api/car-listings` - Browse all listings
+- `POST /api/car-listings` - Create new listing
+- `GET /api/car-listings/:id` - Get listing details
+
+### Transactions
+
+- `POST /api/orders` - Create new order
+- `GET /api/orders` - View user orders
+
+### Services
+
+- `POST /api/appointments` - Book service
+- `GET /api/service-providers` - Browse providers
+
+## 🧪 Setup Instructions
+
+1. **Prerequisites**:
+
+   - Node.js v18+
+   - MongoDB instance
+   - Stripe test keys
+
+2. **Backend Setup**:
+
+```bash
+cd server
+npm install
+echo "JWT_SECRET=your_secret
+STRIPE_SECRET_KEY=your_key
+DB_URI=mongodb://localhost:27017/capstone" > .env
+npm start
+```
+
+3. **Frontend Setup**:
+
+```bash
+cd client
+npm install
+npm run dev
+```
+
+## 📸 Screenshots
+
+_(To be added after deployment)_
+
+## ✅ Team Contributions
+
+| Name              | Contribution Area  |
+| ----------------- | ------------------ |
+| [To be confirmed] | Core functionality |
+
+## 📄 License
+
+Academic Use Only
+
+## 💡 Summary
+
+A comprehensive vehicle marketplace and service platform built with modern web technologies, combining e-commerce functionality with automotive service management.
